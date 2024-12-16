@@ -1,0 +1,22 @@
+### Manifest (manifest.json)
+```json
+{
+  "name": "Fernandina Hotel & Spa",
+  "short_name": "Fernandina",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#d9c083",
+  "icons": [
+    {
+      "src": "PNG 1.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "PNG 1.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

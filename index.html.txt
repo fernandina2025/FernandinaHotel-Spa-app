@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernandina Hotel & Spa</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="PNG 1.png" type="image/png">
+    <link rel="apple-touch-icon" href="PNG 1.png">
+</head>
+<body>
+    <div class="app">
+        <!-- Pantalla de inicio -->
+        <div id="splash-screen" class="screen">
+            <img src="PNG 1.png" alt="Fernandina Hotel & Spa Logo" class="logo">
+            <h1>Fernandina Hotel & Spa</h1>
+        </div>
+
+        <!-- Crear usuario (única vez) -->
+        <div id="user-setup-screen" class="screen hidden">
+            <h2>Crear Usuario</h2>
+            <input type="text" id="initial-user" placeholder="Nombre del usuario">
+            <button id="create-initial-user">Confirmar</button>
+        </div>
+
+        <!-- Pantalla principal -->
+        <div id="main-screen" class="screen hidden">
+            <header>
+                <h2>Gestión de tareas</h2>
+            </header>
+            <main>
+                <div class="task-container">
+                    <!-- Asignar tarea -->
+                    <section>
+                        <h3>Asignar Tarea</h3>
+                        <select id="user-list">
+                            <option value="">Seleccionar usuario</option>
+                        </select>
+                        <textarea id="task-desc" placeholder="Descripción de la tarea"></textarea>
+                        <button id="assign-task">Asignar Tarea</button>
+                    </section>
+                </div>
+
+                <!-- Lista de tareas -->
+                <section>
+                    <h3>Tareas Pendientes</h3>
+                    <ul id="task-list"></ul>
+                </section>
+
+                <!-- Tareas completadas -->
+                <section>
+                    <h3>Tareas Completadas</h3>
+                    <ul id="completed-tasks"></ul>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

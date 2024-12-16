@@ -1,0 +1,74 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const splashScreen = document.getElementById('splash-screen');
+    const userSetupScreen = document.getElementById('user-setup-screen');
+    const mainScreen = document.getElementById('main-screen');
+    const createInitialUserButton = document.getElementById('create-initial-user');
+    const initialUserInput = document.getElementById('initial-user');
+    const userList = document.getElementById('user-list');
+    const assignTaskButton = document.getElementById('assign-task');
+    const taskDescInput = document.getElementById('task-desc');
+    const taskList = document.getElementById('task-list');
+    const completedTasks = document.getElementById('completed-tasks');
+
+    // Splash screen -> User setup screen
+    setTimeout(() => {
+        splashScreen.classList.add('hidden');
+        userSetupScreen.classList.remove('hidden');
+    }, 2000);
+
+    // Initial user creation
+    createInitialUserButton.addEventListener('click', () => {
+        const userName = initialUserInput.value.trim();
+        if (userName) {
+            // Add user to user list
+            const option = document.createElement('option');
+            option.value = userName;
+            option.textContent = userName;
+            userList.appendChild(option);
+
+            // Hide setup screen, show main screen
+            userSetupScreen.classList.add('hidden');
+            mainScreen.classList.remove('hidden');
+        }
+    });
+
+    // Check Notification Permissions
+    if ("Notification" in window && Notification.permission !== "granted") {
+        Notification.requestPermission();
+    }
+
+    // Assign Task
+    assignTaskButton.addEventListener('click', () => {
+        const selectedUser = userList.value;
+        const taskDesc = taskDescInput.value.trim();
+
+        if (selectedUser && taskDesc) {
+            const taskItem = document.createElement('li');
+            taskItem.innerHTML = `<strong>${selectedUser}:</strong> ${taskDesc} 
+                                  <button class='complete-task'>Completar</button>
+                                  <button class='remind-task'>Recordar</button>`;
+            taskList.appendChild(taskItem);
+            taskDescInput.value = '';
+
+            // Complete Task
+            taskItem.querySelector('.complete-task').addEventListener('click', () => {
+                taskItem.remove();
+                const completedItem = document.createElement('li');
+                completedItem.textContent = `${selectedUser}: ${taskDesc}`;
+                completedTasks.appendChild(completedItem);
+            });
+
+            // Send Reminder Notification
+            taskItem.querySelector('.remind-task').addEventListener('click', () => {
+                if (Notification.permission === "granted") {
+                    new Notification("Recordatorio de Tarea", {
+                        body: `Tarea asignada a ${selectedUser}: ${taskDesc}`,
+                        icon: 'PNG 1.png'
+                    });
+                } else {
+                    alert(`Recordatorio: Tarea asignada a ${selectedUser}: ${taskDesc}`);
+                }
+            });
+        }
+    });
+});
